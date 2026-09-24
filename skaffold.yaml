@@ -1,0 +1,18 @@
+# Install Skaffold: https://skaffold.dev/docs/install/
+# DEV: skaffold dev --port-forward
+apiVersion: skaffold/v4beta14
+kind: Config
+build:
+  local:
+    push: false
+  artifacts:
+    - image: hello-world
+      context: .
+portForward:
+  - resourceType: Container
+    resourceName: hello-world
+    port: 3000
+    localPort: 3000
+deploy:
+  docker:
+    images: [hello-world]
